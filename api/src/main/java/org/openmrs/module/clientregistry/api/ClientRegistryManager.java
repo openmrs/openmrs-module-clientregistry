@@ -1,5 +1,6 @@
 package org.openmrs.module.clientregistry.api;
 
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,8 +11,11 @@ import org.openmrs.Patient;
 import org.openmrs.api.GlobalPropertyListener;
 import org.openmrs.event.Event;
 import org.openmrs.module.DaemonToken;
+import org.openmrs.module.clientregistry.ClientRegistryConfig;
 import org.openmrs.module.clientregistry.ClientRegistryConstants;
+import org.openmrs.module.clientregistry.ClientRegistryTransactionType;
 import org.openmrs.module.clientregistry.api.event.PatientCreateUpdateListener;
+import org.openmrs.module.clientregistry.api.impl.FhirPatientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +30,12 @@ public class ClientRegistryManager implements GlobalPropertyListener {
 	
 	@Autowired
 	private PatientCreateUpdateListener patientListener;
+
+	@Autowired
+	private FhirPatientServiceImpl fhirPatientService;
+
+	@Autowired
+	private ClientRegistryConfig clientRegistryConfig;
 	
 	public void setDaemonToken(DaemonToken daemonToken) {
 		this.daemonToken = daemonToken;
@@ -81,5 +91,27 @@ public class ClientRegistryManager implements GlobalPropertyListener {
 		}
 		
 		isRunning.set(false);
+	}
+
+	/**
+	 * Determine the appropriate PatientService class based off of the client registry transaction type configuration
+	 * @return PatientService class corresponding to the appropriate transaction type supported by the client registry
+	 * @throws IllegalArgumentException if defined transaction type is unsupported
+	 */
+	public ClientRegistryPatientService getPatientService() throws IllegalArgumentException {
+		try {
+			String transactionMethodGlobalProperty = clientRegistryConfig.getClientRegistryTransactionMethod().toUpperCase();
+
+			switch (ClientRegistryTransactionType.valueOf(transactionMethodGlobalProperty)) {
+				case FHIR:
+					return fhirPatientService;
+				case HL7:
+					throw new IllegalArgumentException("HL7 transaction type is currently unsupported");
+			}
+		} catch (Exception ignored) {
+
+		}
+
+		throw new IllegalArgumentException("Unsupported transaction type");
 	}
 }

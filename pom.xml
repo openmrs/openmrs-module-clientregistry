@@ -217,7 +217,7 @@
 
   <properties>
     <revision>1.1.5</revision>
-    <fhir2Version>1.5.1</fhir2Version>
+    <fhir2Version>1.6.0-SNAPSHOT</fhir2Version>
     <openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
   </properties>
 </project>

@@ -43,6 +43,14 @@
   </globalProperty>
 
   <globalProperty>
+    <property>@MODULE_ID@.transactionMethod</property>
+    <defaultValue>fhir</defaultValue>
+    <description>
+      Transaction method supported by the Client Registry. Currently supporting fhir or hl7.
+    </description>
+  </globalProperty>
+
+  <globalProperty>
     <property>@MODULE_ID@.username</property>
     <defaultValue>openmrs</defaultValue>
     <description>

@@ -45,4 +45,8 @@ public class ClientRegistryConfig {
 	public String getClientRegistryIdentifierRoot() {
 		return administrationService.getGlobalProperty(ClientRegistryConstants.GP_CLIENT_REGISTRY_IDENTIFIER_ROOT);
 	}
+
+	public String getClientRegistryTransactionMethod() {
+		return administrationService.getGlobalProperty(ClientRegistryConstants.GP_CLIENT_REGISTRY_TRANSACTION_METHOD);
+	}
 }

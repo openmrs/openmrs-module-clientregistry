@@ -9,6 +9,8 @@ public class ClientRegistryConstants {
 	public static final String GP_CLIENT_REGISTRY_PASSWORD = "clientregistry.password";
 	
 	public static final String GP_CLIENT_REGISTRY_IDENTIFIER_ROOT = "clientregistry.identifierRoot";
+
+	public static final String GP_CLIENT_REGISTRY_TRANSACTION_METHOD = "clientregistry.transactionMehod";
 	
 	public static final String UPDATE_MESSAGE_DESTINATION = "topic://UPDATED:org.openmrs.Patient";
 	
