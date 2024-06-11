@@ -91,7 +91,8 @@ public class FhirCRPatientResourceProvider implements IResourceProvider {
 		return patients;
 	}
 	
-	@Search
+
+	@Operation(name = "$search", idempotent = true)
 	public List<Patient> searchClientRegistryPatients() {
 		throw new NotImplementedOperationException("search client registry is not yet implemented");
 	}
