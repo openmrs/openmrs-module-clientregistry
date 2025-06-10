@@ -139,6 +139,6 @@ public class FhirCRPatientResourceProvider implements IResourceProvider {
 	        @OperationParam(name = Patient.SP_RES_ID) TokenAndListParam id,
 	        @OperationParam(name = "_lastUpdated") DateRangeParam lastUpdated, @Sort SortSpec sort) {
 		return crService.searchPatients(new PatientSearchParams(name, given, family, identifier, gender, birthDate,
-		        deathDate, deceased, city, state, postalCode, country, id, lastUpdated, sort, null));
+		        deathDate, deceased, city, state, postalCode, country, id, null, lastUpdated, sort, null));
 	}
 }

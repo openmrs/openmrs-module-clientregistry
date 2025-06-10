@@ -227,7 +227,7 @@
         </snapshotRepository>
 	</distributionManagement>
   <properties>
-    <fhir2Version>2.2.0</fhir2Version>
+    <fhir2Version>2.5.0</fhir2Version>
     <openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
     <openmrsPlatformToolsVersion>2.4.0</openmrsPlatformToolsVersion>
   </properties>

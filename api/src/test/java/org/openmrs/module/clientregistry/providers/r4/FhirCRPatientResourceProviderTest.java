@@ -150,7 +150,7 @@ public class FhirCRPatientResourceProviderTest {
 		StringAndListParam nameParam = createStringParam(NAME);
 		when(
 		    crService.searchPatients(new PatientSearchParams(nameParam, null, null, null, null, null, null, null, null,
-		            null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(nameParam, null, null, null, null, null, null, null, null,
 		    null, null, null, null, null, null);
@@ -163,7 +163,7 @@ public class FhirCRPatientResourceProviderTest {
 		StringAndListParam givenNameParam = createStringParam(NAME);
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, givenNameParam, null, null, null, null, null, null, null,
-		            null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, givenNameParam, null, null, null, null, null, null,
 		    null, null, null, null, null, null, null);
@@ -176,7 +176,7 @@ public class FhirCRPatientResourceProviderTest {
 		StringAndListParam familyNameParam = createStringParam(FAMILY_NAME);
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, familyNameParam, null, null, null, null, null,
-		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, familyNameParam, null, null, null, null, null,
 		    null, null, null, null, null, null, null);
@@ -189,7 +189,7 @@ public class FhirCRPatientResourceProviderTest {
 		TokenAndListParam identifierParam = new TokenAndListParam().addAnd(new TokenOrListParam().add(IDENTIFIER));
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, identifierParam, null, null, null, null,
-		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, identifierParam, null, null, null, null,
 		    null, null, null, null, null, null, null);
@@ -202,7 +202,7 @@ public class FhirCRPatientResourceProviderTest {
 		TokenAndListParam genderParam = new TokenAndListParam().addAnd(new TokenOrListParam().add(GENDER));
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, genderParam, null, null, null, null,
-		            null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, genderParam, null, null, null,
 		    null, null, null, null, null, null, null);
@@ -215,7 +215,7 @@ public class FhirCRPatientResourceProviderTest {
 		DateRangeParam birthDateParam = new DateRangeParam().setLowerBound(BIRTH_DATE).setUpperBound(BIRTH_DATE);
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, birthDateParam, null, null, null,
-		            null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, birthDateParam, null, null,
 		    null, null, null, null, null, null, null);
@@ -228,7 +228,7 @@ public class FhirCRPatientResourceProviderTest {
 		TokenAndListParam deceasedParam = new TokenAndListParam().addAnd(new TokenOrListParam().add("true"));
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, null, null, deceasedParam, null,
-		            null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, null, null, deceasedParam,
 		    null, null, null, null, null, null, null);
@@ -241,7 +241,7 @@ public class FhirCRPatientResourceProviderTest {
 		StringAndListParam cityParam = new StringAndListParam().addAnd(new StringOrListParam().add(new StringParam(CITY)));
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, null, null, null, cityParam,
-		            null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, null, null, null, cityParam,
 		    null, null, null, null, null, null);
@@ -254,7 +254,7 @@ public class FhirCRPatientResourceProviderTest {
 		StringAndListParam stateParam = new StringAndListParam().addAnd(new StringOrListParam().add(new StringParam(STATE)));
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, null, null, null, null,
-		            stateParam, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            stateParam, null, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, null, null, null, null,
 		    stateParam, null, null, null, null, null);
@@ -268,7 +268,7 @@ public class FhirCRPatientResourceProviderTest {
 		        POSTAL_CODE)));
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, null, null, null, null, null,
-		            postalCodeParam, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            postalCodeParam, null, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, null, null, null, null,
 		    null, postalCodeParam, null, null, null, null);
@@ -282,7 +282,7 @@ public class FhirCRPatientResourceProviderTest {
 		        COUNTRY)));
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, null, null, null, null, null,
-		            null, countryParam, null, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, countryParam, null, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, null, null, null, null,
 		    null, null, countryParam, null, null, null);
@@ -296,7 +296,7 @@ public class FhirCRPatientResourceProviderTest {
 		
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, null, null, null, null, null,
-		            null, null, uuid, null, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, uuid, null, null, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, null, null, null, null,
 		    null, null, null, uuid, null, null);
@@ -310,7 +310,7 @@ public class FhirCRPatientResourceProviderTest {
 		
 		when(
 		    crService.searchPatients(new PatientSearchParams(null, null, null, null, null, null, null, null, null, null,
-		            null, null, null, lastUpdated, null, null))).thenReturn(getBundleProvider(patient));
+		            null, null, null, null, lastUpdated, null, null))).thenReturn(getBundleProvider(patient));
 		
 		IBundleProvider results = resourceProvider.searchPatients(null, null, null, null, null, null, null, null, null,
 		    null, null, null, null, lastUpdated, null);

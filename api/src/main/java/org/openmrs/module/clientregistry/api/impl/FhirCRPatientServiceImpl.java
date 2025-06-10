@@ -33,17 +33,17 @@ import ca.uhn.fhir.rest.param.TokenParam;
 
 @Component
 public class FhirCRPatientServiceImpl implements CRPatientService {
-
+	
 	@Autowired
 	@Qualifier("clientRegistryFhirClient")
 	private IGenericClient fhirClient;
-
+	
 	@Autowired
 	private PatientSearchCriteriaBuilder criteriaBuilder;
-
+	
 	@Autowired
 	private FhirGlobalPropertyService globalPropertyService;
-
+	
 	@Override
 	public Patient getPatientById(String id) {
 		if (StringUtils.isBlank(id)) {
@@ -51,7 +51,7 @@ public class FhirCRPatientServiceImpl implements CRPatientService {
 		}
 		return fhirClient.read().resource(Patient.class).withId(id).execute();
 	}
-
+	
 	@Override
 	public IBundleProvider getPatientsByPIX(String sourceIdentifier, String sourceIdentifierSystem,
 			List<String> targetSystems) {
@@ -74,22 +74,25 @@ public class FhirCRPatientServiceImpl implements CRPatientService {
 		if (crIdentifiers.isEmpty()) {
 			return new CRSearchBundleProvider(Collections.emptyList());
 		}
-
+		String defaultPageSize = globalPropertyService.getGlobalProperty(
+			FhirConstants.OPENMRS_FHIR_DEFAULT_PAGE_SIZE, 
+			"10"
+		);
 		Bundle patientBundle = fhirClient.search().forResource(Patient.class)
 				.where(new StringClientParam(Patient.SP_RES_ID).matches().values(crIdentifiers))
-				.count(globalPropertyService.getGlobalProperty(FhirConstants.OPENMRS_FHIR_DEFAULT_PAGE_SIZE, 10))
+				.count(Integer.parseInt(defaultPageSize))
 				.returnBundle(Bundle.class)
 				.execute();
 
 		return new CRSearchBundleProvider(parseCRPatientSearchResults(patientBundle));
 
 	}
-
+	
 	@Override
 	public IBundleProvider searchPatients(PatientSearchParams patientSearchParams) {
 		List<ICriterion<?>> criterions = criteriaBuilder.buildCriteria(patientSearchParams);
 		IQuery<IBaseBundle> query = fhirClient.search().forResource(Patient.class);
-
+		
 		for (int i = 0; i < criterions.size(); i++) {
 			ICriterion<?> criterion = criterions.get(i);
 			if (i == 0) {
@@ -98,30 +101,31 @@ public class FhirCRPatientServiceImpl implements CRPatientService {
 				query.and(criterion);
 			}
 		}
-		query.count(globalPropertyService.getGlobalProperty(FhirConstants.OPENMRS_FHIR_DEFAULT_PAGE_SIZE, 10));
-
+		
+		String defaultPageSize = globalPropertyService.getGlobalProperty(FhirConstants.OPENMRS_FHIR_DEFAULT_PAGE_SIZE, "10");
+		query.count(Integer.parseInt(defaultPageSize));
+		
 		Bundle patientBundle = query.returnBundle(Bundle.class).execute();
 		return new CRSearchBundleProvider(parseCRPatientSearchResults(patientBundle));
 	}
-
+	
 	@Override
 	public Patient createPatient(Patient patient) {
 		return (Patient) fhirClient.create().resource(patient).execute().getResource();
 	}
-
+	
 	@Override
 	public Patient updatePatient(Patient patient) {
 		return (Patient) fhirClient.update().resource(patient).execute().getResource();
 	}
-
+	
 	@Override
 	public void purgePatient(Patient patient) {
 		fhirClient.delete().resource(patient).execute();
 	}
-
+	
 	/**
-	 * Filter and parse out fhir patients from Client Registry Patient Search
-	 * results
+	 * Filter and parse out fhir patients from Client Registry Patient Search results
 	 */
 	private List<Patient> parseCRPatientSearchResults(Bundle patientBundle) {
 		return patientBundle.getEntry().stream().filter(entry -> entry.getResource().hasType(FhirConstants.PATIENT))

@@ -8,9 +8,9 @@ import org.hl7.fhir.instance.model.api.IBaseResource;
 import ca.uhn.fhir.rest.server.SimpleBundleProvider;
 
 public class CRSearchBundleProvider extends SimpleBundleProvider implements Serializable {
-
+	
 	public CRSearchBundleProvider(List<? extends IBaseResource> patientList) {
 		super(patientList);
 	}
-
+	
 }
