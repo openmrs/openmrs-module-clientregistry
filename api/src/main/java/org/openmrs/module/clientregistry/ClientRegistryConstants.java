@@ -6,17 +6,17 @@ public class ClientRegistryConstants {
 	
 	public static final String GP_EXTENSION_UUID_EXTENSION_URLS = "clientregistry.uuidAndExtensionURL";
 	
-	public static final String GP_CLIENT_REGISTRY_SERVER_URL = "CLIENTREGISTRY_SERVERURL";
+	public static final String GP_CLIENT_REGISTRY_SERVER_URL = "clientregistry.clientRegistryServerUrl";
 	
 	public static final String GP_FHIR_CLIENT_REGISTRY_GET_PATIENT_ENDPOINT = "clientregistry.fhirGetPatientEndpoint";
 	
 	public static final String GP_CLIENT_REGISTRY_DEFAULT_PATIENT_IDENTIFIER_SYSTEM = "clientregistry.defaultPatientIdentifierSystem";
 	
-	public static final String GP_CLIENT_REGISTRY_USER_NAME = "CLIENTREGISTRY_USERNAME";
+	public static final String GP_CLIENT_REGISTRY_USER_NAME = "clientregistry.username";
 	
-	public static final String GP_CLIENT_REGISTRY_PASSWORD = "CLIENTREGISTRY_PASSWORD";
+	public static final String GP_CLIENT_REGISTRY_PASSWORD = "clientregistry.password";
 	
-	public static final String GP_CLIENT_REGISTRY_IDENTIFIER_ROOT = "CLIENTREGISTRY_IDENTIFIERROOT";
+	public static final String GP_CLIENT_REGISTRY_IDENTIFIER_ROOT = "clientregistry.identifierRoot";
 	
 	public static final String GP_CLIENT_REGISTRY_TRANSACTION_METHOD = "clientregistry.transactionMethod";
 	

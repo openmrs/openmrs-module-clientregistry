@@ -12,7 +12,6 @@ import org.openmrs.api.AdministrationService;
 import org.openmrs.module.clientregistry.providers.FhirCRConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,24 +26,12 @@ public class ClientRegistryConfig {
 	@Qualifier("adminService")
 	AdministrationService administrationService;
 	
-	@Value("${CLIENTREGISTRY_SERVERURL:}")
-	private String serverUrl;
-	
-	@Value("${CLIENTREGISTRY_USERNAME:}")
-	private String username;
-	
-	@Value("${CLIENTREGISTRY_PASSWORD:}")
-	private String password;
-	
-	@Value("${CLIENTREGISTRY_IDENTIFIERROOT:}")
-	private String identifierRoot;
-	
 	public boolean clientRegistryConnectionEnabled() {
 		return StringUtils.isNotBlank(getClientRegistryServerUrl());
 	}
 	
 	public String getClientRegistryServerUrl() {
-		return serverUrl;
+		return administrationService.getGlobalProperty(ClientRegistryConstants.GP_CLIENT_REGISTRY_SERVER_URL);
 	}
 	
 	public String getClientRegistryGetPatientEndpoint() {
@@ -62,15 +49,17 @@ public class ClientRegistryConfig {
 	}
 	
 	public String getClientRegistryUserName() {
-		return username;
+		String username = administrationService.getGlobalProperty(ClientRegistryConstants.GP_CLIENT_REGISTRY_USER_NAME);
+		return (username == null || username.isEmpty()) ? "openmrs" : username;
 	}
 	
 	public String getClientRegistryPassword() {
-		return password;
+		String password = administrationService.getGlobalProperty(ClientRegistryConstants.GP_CLIENT_REGISTRY_PASSWORD);
+		return (password == null || password.isEmpty()) ? "openmrs" : password;
 	}
 	
 	public String getClientRegistryIdentifierRoot() {
-		return identifierRoot;
+		return administrationService.getGlobalProperty(ClientRegistryConstants.GP_CLIENT_REGISTRY_IDENTIFIER_ROOT);
 	}
 	
 	public String getClientRegistryTransactionMethod() {
